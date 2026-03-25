@@ -5,6 +5,10 @@
    mode: 'development',
    devtool: 'inline-source-map',
    devServer: {
-     static: './dist',
-   },
+    allowedHosts: 'all',
+    client: {
+      webSocketURL: 'auto://0.0.0.0/ws',
+    },
+    port: 8080,
+  },
  });

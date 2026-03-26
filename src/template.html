@@ -13,10 +13,25 @@
         </ul>
     </div>
     <div id="project-container">
-        <div class="project">
-            <h3>default</h3>
-
+        <div id="project-header">
+            <h3 id="projec-title">default</h3>
+            <button command="show-modal" commandfor="addToDo-dialog">add to do</button>
+            <dialog id="addToDo-dialog">
+                <form id="addToDoForm">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" required>
+                    <label for="description">description</label>
+                    <input type="text" name="description" id="description" required>
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" name="dueDate" id="dueDate" required>
+                    <label for="priority">Priority</label>
+                    <input type="number" name="priority" id="priority" required>
+                    <button type="submit" id="submitBtn">submit</button>
+                    <button type="button" id="cancelBtn">cancel</button>
+                 </form>
+            </dialog>
         </div>
+        <div id="to-do-container"></div>
     </div>
 </body>
 </html>

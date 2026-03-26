@@ -1,14 +1,44 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body{
     margin: 0;
     display: flex;
 }
+
 #sidebar{
     min-width: 20vw;
     height: 100vh;
     background-color: rgb(95, 171, 194);
 }
+
 #project-container{
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
+}
+
+#project-header{
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#addToDoForm{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.toDoItem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    gap: 5px;
 }

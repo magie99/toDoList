@@ -13,11 +13,12 @@ const display = (() => {
         toDoContainer.innerHTML = "";
         for (const item of project.list) {
             const newItem = createElement("div", "toDoItem")
-            newItem.appendChild(createElement("h4", "", item.title));
-            const details = createElement("div", "toDoItem")
-            newItem.appendChild(createElement("div", "", item.priority));
-            newItem.appendChild(createElement("div", "", item.dueDate));
-            toDoContainer.appendChild(newItem)
+            newItem.appendChild(createElement("div", "", item.title));
+            const details = createElement("div", "toDoItemDetails")
+            details.appendChild(createElement("div", "", `priority: ${item.priority}`));
+            details.appendChild(createElement("div", "", `due: ${item.dueDate}`));
+            newItem.appendChild(details);
+            toDoContainer.appendChild(newItem);
         }
     };
     return {

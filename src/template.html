@@ -19,19 +19,23 @@
             <dialog id="addToDo-dialog">
                 <form id="addToDoForm">
                     <label for="title">Title</label>
-                    <input type="text" name="title" id="title" required>
+                    <input type="text" name="title" id="title" value="title" required>
                     <label for="description">description</label>
-                    <input type="text" name="description" id="description" required>
+                    <input type="text" name="description" id="description" value="description" required>
                     <label for="dueDate">Due Date</label>
-                    <input type="date" name="dueDate" id="dueDate" required>
+                    <input type="date" name="dueDate" id="dueDate">
                     <label for="priority">Priority</label>
-                    <input type="number" name="priority" id="priority" required>
+                    <input type="number" name="priority" id="priority" value="5">
                     <button type="submit" id="submitBtn">submit</button>
                     <button type="button" id="cancelBtn">cancel</button>
                  </form>
             </dialog>
         </div>
-        <div id="to-do-container"></div>
+        <div id="to-do-container">
+            <div class="toDoItem">
+                <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>checkbox-blank-circle-outline</title><path d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg></div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

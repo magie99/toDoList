@@ -4,6 +4,7 @@ export default class ToDo {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.id = crypto.randomUUID();
     }
 
     delete;
@@ -12,4 +13,5 @@ export default class ToDo {
     changeDescription;
     changeDueDate;
     changePriority;
+    opendialog;
 }

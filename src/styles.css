@@ -92,3 +92,15 @@ body{
  .checked{
     opacity: .3;
  }
+
+ #moreDialog{
+    border: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+ }
+
+  #moreDialog button{
+    border: 1px solid white;
+    background-color: aquamarine;
+  }

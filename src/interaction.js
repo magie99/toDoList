@@ -14,6 +14,7 @@ const interaction = (() => {
         const addToDoForm = document.getElementById("addToDoForm");
         const addToDoDialog = document.getElementById("addToDo-dialog");
         const toDoContainer = document.getElementById("to-do-container")
+        const more = document.getElementById("moreDialog")
 
         addToDoForm.addEventListener("submit", function (e) {
             e.preventDefault(); 
@@ -33,11 +34,25 @@ const interaction = (() => {
             const checkbox = e.target.closest(".checkbox");
             const editIcon = e.target.closest(".editIcon");
             const item = currentProject.list.find(item => item.id == e.target.closest(".toDoItem").dataset.id);
+            const more = document.getElementById("moreDialog")
 
             if (checkbox){
                 item.markComplete();
                 display.renderProject(currentProject);
             }
+
+            if (editIcon){
+                const rect = editIcon.getBoundingClientRect();
+                more.showModal();
+                more.style.margin = '0';
+                more.style.position = 'absolute'; 
+                more.style.top = `${rect.bottom + window.scrollY}px`;
+                more.style.left = `${rect.left + window.scrollX}px`;
+            }
+            if (more.open && !more.contains(e.target)){
+            more.close();
+            }
+            
         });
 
         cancelBtn.addEventListener('click', () => {

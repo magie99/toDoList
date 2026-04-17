@@ -4,14 +4,20 @@ export default class ToDo {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.complete = false;
         this.id = crypto.randomUUID();
     }
 
-    delete;
-    markComplete;
-    changeTitle;
-    changeDescription;
-    changeDueDate;
-    changePriority;
-    opendialog;
+    markComplete(){
+        this.complete = true
+    }
+
+
+    //delete;
+    //markComplete;
+    //changeTitle;
+    //changeDescription;
+    //changeDueDate;
+    //changePriority;
+    //opendialog;
 }

@@ -89,4 +89,6 @@ body{
     align-self: flex-start;
 }
 
- 
+ .checked{
+    opacity: .3;
+ }

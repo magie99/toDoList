@@ -13,6 +13,7 @@ const interaction = (() => {
         const cancelBtn = document.getElementById("cancelBtn");
         const addToDoForm = document.getElementById("addToDoForm");
         const addToDoDialog = document.getElementById("addToDo-dialog");
+        const toDoContainer = document.getElementById("to-do-container")
 
         addToDoForm.addEventListener("submit", function (e) {
             e.preventDefault(); 
@@ -26,6 +27,17 @@ const interaction = (() => {
             addToDoForm.reset();
             console.log(currentProject);
             display.renderProject(currentProject);
+        });
+
+        toDoContainer.addEventListener('click', (e) => {
+            const checkbox = e.target.closest(".checkbox");
+            const editIcon = e.target.closest(".editIcon");
+            const item = currentProject.list.find(item => item.id == e.target.closest(".toDoItem").dataset.id);
+
+            if (checkbox){
+                item.markComplete();
+                display.renderProject(currentProject);
+            }
         });
 
         cancelBtn.addEventListener('click', () => {

@@ -13,8 +13,16 @@ const interaction = (() => {
         const cancelBtn = document.getElementById("cancelBtn");
         const addToDoForm = document.getElementById("addToDoForm");
         const addToDoDialog = document.getElementById("addToDo-dialog");
-        const toDoContainer = document.getElementById("to-do-container")
-        const more = document.getElementById("moreDialog")
+        const toDoContainer = document.getElementById("to-do-container");
+
+        window.addEventListener('click', (e) =>{
+            const more = document.getElementById("moreDialog");
+            const editIcon = e.target.closest(".editIcon");
+
+            if (more.open && !more.contains(e.target) && !editIcon) {
+                more.close();
+            }
+        });
 
         addToDoForm.addEventListener("submit", function (e) {
             e.preventDefault(); 
@@ -33,8 +41,14 @@ const interaction = (() => {
         toDoContainer.addEventListener('click', (e) => {
             const checkbox = e.target.closest(".checkbox");
             const editIcon = e.target.closest(".editIcon");
+            const toDoElement = e.target.closest(".toDoItem");
+            const more = document.getElementById("moreDialog");
+            
+            if (!toDoElement){
+                return;
+            }
+
             const item = currentProject.list.find(item => item.id == e.target.closest(".toDoItem").dataset.id);
-            const more = document.getElementById("moreDialog")
 
             if (checkbox){
                 item.markComplete();
@@ -43,16 +57,12 @@ const interaction = (() => {
 
             if (editIcon){
                 const rect = editIcon.getBoundingClientRect();
-                more.showModal();
+                more.show();
                 more.style.margin = '0';
                 more.style.position = 'absolute'; 
                 more.style.top = `${rect.bottom + window.scrollY}px`;
                 more.style.left = `${rect.left + window.scrollX}px`;
             }
-            if (more.open && !more.contains(e.target)){
-            more.close();
-            }
-            
         });
 
         cancelBtn.addEventListener('click', () => {

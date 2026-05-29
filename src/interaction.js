@@ -14,12 +14,12 @@ const interaction = (() => {
         const addToDoForm = document.getElementById("addToDoForm");
         const addToDoDialog = document.getElementById("addToDo-dialog");
         const toDoContainer = document.getElementById("to-do-container");
+        const more = document.getElementById("moreDialog");
 
-        window.addEventListener('click', (e) =>{
-            const more = document.getElementById("moreDialog");
-            const editIcon = e.target.closest(".editIcon");
-
-            if (more.open && !more.contains(e.target) && !editIcon) {
+        window.addEventListener('click', (e) => {
+            if (e.target.closest(".editIcon")) return; 
+            
+            if (more.open && !more.contains(e.target)) {
                 more.close();
             }
         });
@@ -42,7 +42,6 @@ const interaction = (() => {
             const checkbox = e.target.closest(".checkbox");
             const editIcon = e.target.closest(".editIcon");
             const toDoElement = e.target.closest(".toDoItem");
-            const more = document.getElementById("moreDialog");
             
             if (!toDoElement){
                 return;
@@ -56,7 +55,8 @@ const interaction = (() => {
             }
 
             if (editIcon){
-                const rect = editIcon.getBoundingClientRect();
+                e.stopPropagation()
+                var rect = editIcon.getBoundingClientRect();
                 more.show();
                 more.style.margin = '0';
                 more.style.position = 'absolute'; 

@@ -24,17 +24,49 @@ const interaction = (() => {
             }
         });
 
+        more.addEventListener('click', (e) => {
+            const moreDelete = e.target.closest("#moreDelete");
+            const moreEdit = e.target.closest("#moreEdit");
+            const moreDetails = e.target.closest("#moreDetails");
+            const item = currentProject.list.find(item => item.id == more.dataset.activeTodoId);
+            
+            if(moreDelete){
+                currentProject.removeToDo(item);
+                display.renderProject(currentProject);
+                more.close();
+            }
+
+            if(moreEdit){
+                more.close()
+                document.getElementById("title").value = item.title;
+                document.getElementById("description").value = item.description;
+                document.getElementById("dueDate").value = item.dueDate;
+                document.getElementById("priority").value = item.priority;
+                addToDoForm.dataset.editId = item.id
+                addToDoDialog.showModal();
+            }
+        });
+
         addToDoForm.addEventListener("submit", function (e) {
-            e.preventDefault(); 
+            e.preventDefault(); display.renderProject(currentProject);
             const title = document.getElementById("title").value;
             const description = document.getElementById("description").value;
             const dueDate = document.getElementById("dueDate").value;
             const priority = document.getElementById("priority").value;
-            const newToDo = new ToDo(title, description, dueDate, priority)
-            currentProject.addToDo(newToDo);
+
+            if (addToDoForm.dataset.editId){
+                const item = currentProject.list.find(item => item.id == addToDoForm.dataset.editId);
+                item.update(title, description, dueDate, priority);
+                delete addToDoForm.dataset.editId
+            
+            }
+            else{
+                const newToDo = new ToDo(title, description, dueDate, priority)
+                currentProject.addToDo(newToDo);
+            }
+            
             addToDoDialog.close();
             addToDoForm.reset();
-            console.log(currentProject);
             display.renderProject(currentProject);
         });
 
@@ -62,6 +94,7 @@ const interaction = (() => {
                 more.style.position = 'absolute'; 
                 more.style.top = `${rect.bottom + window.scrollY}px`;
                 more.style.left = `${rect.left + window.scrollX}px`;
+                more.dataset.activeTodoId = toDoElement.dataset.id;
             }
         });
 

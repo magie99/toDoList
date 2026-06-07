@@ -12,6 +12,12 @@ export default class ToDo {
         this.complete = true
     }
 
+    update(title, description, dueDate, priority){
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+    }
 
     //delete;
     //markComplete;

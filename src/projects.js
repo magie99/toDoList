@@ -12,4 +12,8 @@ export default class Project {
         this.list.push(toDo)
     };
 
+    removeToDo(toDo){
+        this.list.splice(this.list.indexOf(toDo),1);
+    };
+
 }

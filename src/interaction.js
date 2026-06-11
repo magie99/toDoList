@@ -1,20 +1,19 @@
 import ToDo from "./toDo.js";
 import Project from "./projects.js";
 import display from "./display.js";
+import projectManager from "./projectManager.js";
 
 const interaction = (() => {
-    let currentProject;
-
-    const changeCurrentProject = (project) =>{
-        currentProject = project;
-    }
-
+    
     const addEventListeners = () => {
         const cancelBtn = document.getElementById("cancelBtn");
         const addToDoForm = document.getElementById("addToDoForm");
         const addToDoDialog = document.getElementById("addToDo-dialog");
         const toDoContainer = document.getElementById("to-do-container");
         const more = document.getElementById("moreDialog");
+        const addProjectBtn = document.getElementById("newProjectBtn");
+        const addProjectDialog = document.getElementById("addProjectDialog");
+        const projectList = document.getElementById("project-list");
 
         window.addEventListener('click', (e) => {
             if (e.target.closest(".editIcon")) return; 
@@ -22,6 +21,12 @@ const interaction = (() => {
             if (more.open && !more.contains(e.target)) {
                 more.close();
             }
+        });
+
+        addProjectForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            
+
         });
 
         more.addEventListener('click', (e) => {
@@ -107,7 +112,6 @@ const interaction = (() => {
     }   
     return{
         addEventListeners,
-        changeCurrentProject
     };
 })();
 

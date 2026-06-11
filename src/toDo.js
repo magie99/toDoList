@@ -9,7 +9,13 @@ export default class ToDo {
     }
 
     markComplete(){
-        this.complete = true
+        if (this.complete == false){
+            this.complete = true
+        }
+        else{
+            this.complete = false
+        }
+            
     }
 
     update(title, description, dueDate, priority){

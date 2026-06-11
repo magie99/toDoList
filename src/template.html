@@ -10,6 +10,7 @@
         <h3>my todo list</h3>
         <ul id="project-list">
             <li>default</li>
+            <button command="show-modal" commandfor="addProjectDialog">new project</button>
         </ul>
     </div>
     <div id="project-container">
@@ -37,6 +38,14 @@
         <button id="moreDetails">details</button>
         <button id="moreEdit">edit</button>
         <button id="moreDelete">delete</button>
+    </dialog>
+    <dialog id="addProjectDialog">
+        <form id="addProjectForm">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" value="title" required>
+            <button type="submit">submit</button>
+            <button type="button">cancel</button>
+        </form>
     </dialog>
 </body>
 </html>

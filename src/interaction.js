@@ -14,6 +14,7 @@ const interaction = (() => {
         const addProjectBtn = document.getElementById("newProjectBtn");
         const addProjectDialog = document.getElementById("addProjectDialog");
         const projectList = document.getElementById("project-list");
+        const addProjectForm = document.getElementById("addProjectForm")
 
         window.addEventListener('click', (e) => {
             if (e.target.closest(".editIcon")) return; 
@@ -24,8 +25,15 @@ const interaction = (() => {
         });
 
         addProjectForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            
+            e.preventDefault(); 
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            const newProject = projectManager.addProject(data.title);
+            projectManager.changeCurrentProject(newProject.title);
+            addProjectDialog.close();
+            addProjectForm.reset();
+            display.renderProject(projectManager.getCurrentProject());
+            console.log(projectManager.getAllProjects())
 
         });
 
@@ -33,46 +41,45 @@ const interaction = (() => {
             const moreDelete = e.target.closest("#moreDelete");
             const moreEdit = e.target.closest("#moreEdit");
             const moreDetails = e.target.closest("#moreDetails");
-            const item = currentProject.list.find(item => item.id == more.dataset.activeTodoId);
+            const item = projectManager.getCurrentProject().list.find(item => item.id == more.dataset.activeTodoId);
             
             if(moreDelete){
-                currentProject.removeToDo(item);
-                display.renderProject(currentProject);
+                projectManager.getCurrentProject().removeToDo(item);
+                display.renderProject(projectManager.getCurrentProject());
                 more.close();
             }
 
             if(moreEdit){
                 more.close()
-                document.getElementById("title").value = item.title;
-                document.getElementById("description").value = item.description;
-                document.getElementById("dueDate").value = item.dueDate;
-                document.getElementById("priority").value = item.priority;
+                Object.keys(item).forEach(key => {
+                    if (addToDoForm.elements[key]) {
+                        addToDoForm.elements[key].value = item[key];
+                    }
+                });
                 addToDoForm.dataset.editId = item.id
                 addToDoDialog.showModal();
             }
         });
 
         addToDoForm.addEventListener("submit", function (e) {
-            e.preventDefault(); display.renderProject(currentProject);
-            const title = document.getElementById("title").value;
-            const description = document.getElementById("description").value;
-            const dueDate = document.getElementById("dueDate").value;
-            const priority = document.getElementById("priority").value;
+            e.preventDefault(); 
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
 
             if (addToDoForm.dataset.editId){
-                const item = currentProject.list.find(item => item.id == addToDoForm.dataset.editId);
-                item.update(title, description, dueDate, priority);
+                const item = projectManager.getCurrentProject().list.find(item => item.id == addToDoForm.dataset.editId);
+                item.update(data.title, data.description, data.dueDate, data.priority);
                 delete addToDoForm.dataset.editId
             
             }
             else{
-                const newToDo = new ToDo(title, description, dueDate, priority)
-                currentProject.addToDo(newToDo);
+                const newToDo = new ToDo(data.title, data.description, data.dueDate, data.priority)
+                projectManager.getCurrentProject().addToDo(newToDo);
             }
             
             addToDoDialog.close();
             addToDoForm.reset();
-            display.renderProject(currentProject);
+            display.renderProject(projectManager.getCurrentProject());
         });
 
         toDoContainer.addEventListener('click', (e) => {
@@ -84,11 +91,11 @@ const interaction = (() => {
                 return;
             }
 
-            const item = currentProject.list.find(item => item.id == e.target.closest(".toDoItem").dataset.id);
+            const item = projectManager.getCurrentProject().list.find(item => item.id == e.target.closest(".toDoItem").dataset.id);
 
             if (checkbox){
                 item.markComplete();
-                display.renderProject(currentProject);
+                display.renderProject(projectManager.getCurrentProject());
             }
 
             if (editIcon){
@@ -103,10 +110,10 @@ const interaction = (() => {
             }
         });
 
-        cancelBtn.addEventListener('click', () => {
-        addToDoDialog.close();
-        addToDoForm.reset();
-        });
+    addToDoDialog.addEventListener("close", () => {
+        addToDoForm.reset();            
+        delete addToDoForm.dataset.editId; 
+    });
 
 
     }   

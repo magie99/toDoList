@@ -1,9 +1,11 @@
+import Project from "./projects.js";
+
 const projectManager = (() => {
     const projects = [];
     let currentProject;
 
-    const changeCurrentProject = (title) =>{
-        currentProject = projects.find(item => item.title == title);
+    const changeCurrentProject = (project) =>{
+        currentProject = project;
     }
     const getCurrentProject = () =>{
         return currentProject 

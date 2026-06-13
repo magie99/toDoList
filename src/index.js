@@ -6,6 +6,7 @@ import interaction from "./interaction.js";
 import projectManager from "./projectManager.js";
 
 
-const defaultProject = new Project("default");
+const defaultProject = projectManager.addProject("default");
 projectManager.changeCurrentProject(defaultProject);
+display.renderProjectList();
 interaction.addEventListeners();

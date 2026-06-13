@@ -1,3 +1,5 @@
+import projectManager from "./projectManager.js";
+import Project from "./projects.js";
 
 const display = (() => {
 
@@ -34,9 +36,12 @@ const display = (() => {
     };
     
     const toDoContainer = document.getElementById("to-do-container");
+    const projectHeader = document.getElementById("project-title");
 
     const renderProject = (project) => {
         toDoContainer.innerHTML = "";
+        projectHeader.innerHTML = `${project.title}`;
+
         for (const item of project.list) {
             if (item.complete === false){
                 renderToDo(item, false)
@@ -49,8 +54,21 @@ const display = (() => {
         }
     };
 
-    //const openEditModal = (toDoItem)
+    const projectList = document.getElementById("project-list");
+
+    const renderProjectList = () => {
+        projectList.innerHTML = "";
+        const projects = projectManager.getAllProjects();
+        for (const project of projects){
+            const newItem = createElement("a", "projectLink", project.title);
+            newItem.setAttribute("href", "#"); 
+            newItem.dataset.projectTitle = project.title; 
+            projectList.appendChild(newItem);
+        }
+    }
+
     return {
+        renderProjectList,
         renderProject
     };
   })();

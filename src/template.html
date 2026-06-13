@@ -8,14 +8,12 @@
 <body>
     <div id="sidebar">
         <h3>my todo list</h3>
-        <ul id="project-list">
-            <li>default</li>
-            <button command="show-modal" commandfor="addProjectDialog">new project</button>
-        </ul>
+        <button command="show-modal" commandfor="addProjectDialog">new project</button>
+        <ul id="project-list"></ul>
     </div>
     <div id="project-container">
         <div id="project-header">
-            <h3 id="projec-title">default</h3>
+            <h3 id="project-title">default</h3>
             <button command="show-modal" commandfor="addToDo-dialog">add to do</button>
             <dialog id="addToDo-dialog">
                 <form id="addToDoForm">
@@ -28,7 +26,7 @@
                     <label for="priority">Priority</label>
                     <input type="number" name="priority" value="5">
                     <button type="submit">submit</button>
-                    <button type="submit" formmethod="dialog">cancel</button>
+                    <button type="button" class="btn-cancel">cancel</button>
                  </form>
             </dialog>
         </div>
@@ -44,7 +42,7 @@
             <label for="title">Title</label>
             <input type="text" name="title" id="title" value="title" required>
             <button type="submit">submit</button>
-            <button type="submit" formmethod="dialog">cancel</button>
+            <button type="button" class="btn-cancel">cancel</button>
         </form>
     </dialog>
 </body>

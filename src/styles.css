@@ -13,6 +13,11 @@ body{
     background-color: rgb(95, 171, 194);
 }
 
+#project-list{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 #project-container{
     width: 100%;
     display: flex;

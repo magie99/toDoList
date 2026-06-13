@@ -24,17 +24,25 @@ const interaction = (() => {
             }
         });
 
+        document.addEventListener("click", function(e) {
+            if (e.target.classList.contains("btn-cancel")) {
+                const dialog = e.target.closest("dialog");
+                const form = e.target.closest("form");
+                if (dialog) dialog.close();
+                if (form) form.reset();
+            }
+});
+
         addProjectForm.addEventListener("submit", function (e) {
             e.preventDefault(); 
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             const newProject = projectManager.addProject(data.title);
-            projectManager.changeCurrentProject(newProject.title);
+            projectManager.changeCurrentProject(newProject);
             addProjectDialog.close();
             addProjectForm.reset();
+            display.renderProjectList();
             display.renderProject(projectManager.getCurrentProject());
-            console.log(projectManager.getAllProjects())
-
         });
 
         more.addEventListener('click', (e) => {
@@ -110,9 +118,17 @@ const interaction = (() => {
             }
         });
 
-    addToDoDialog.addEventListener("close", () => {
-        addToDoForm.reset();            
+    addToDoDialog.addEventListener("close", () => {          
         delete addToDoForm.dataset.editId; 
+    });
+
+    projectList.addEventListener('click', (e) => {
+        e.preventDefault()
+        const projectLink = e.target.closest("a");
+        if (!projectLink) return; 
+        const target = projectManager.getAllProjects().find(item => item.title == projectLink.dataset.projectTitle); 
+        projectManager.changeCurrentProject(target);
+        display.renderProject(target);
     });
 
 

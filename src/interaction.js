@@ -31,7 +31,7 @@ const interaction = (() => {
                 if (dialog) dialog.close();
                 if (form) form.reset();
             }
-});
+        });
 
         addProjectForm.addEventListener("submit", function (e) {
             e.preventDefault(); 
@@ -118,21 +118,38 @@ const interaction = (() => {
             }
         });
 
-    addToDoDialog.addEventListener("close", () => {          
-        delete addToDoForm.dataset.editId; 
-    });
+        addToDoDialog.addEventListener("close", () => {          
+            delete addToDoForm.dataset.editId; 
+        });
 
-    projectList.addEventListener('click', (e) => {
-        e.preventDefault()
-        const projectLink = e.target.closest("a");
-        if (!projectLink) return; 
-        const target = projectManager.getAllProjects().find(item => item.title == projectLink.dataset.projectTitle); 
-        projectManager.changeCurrentProject(target);
-        display.renderProject(target);
-    });
-
+        projectList.addEventListener('click', (e) => {
+            e.preventDefault()
+            const projectLink = e.target.closest("a");
+            const trash = e.target.closest("svg");
+            const target = projectManager.getAllProjects().find(item => item.title == e.target.closest("div").dataset.projectTitle); 
+            if (projectLink){
+                projectManager.changeCurrentProject(target);
+                display.renderProject(target);
+            }
+            if (trash){
+                projectManager.removeProject(target);
+                const nextproject = projectManager.getAllProjects().at(-1);
+                if (nextproject){
+                    projectManager.changeCurrentProject(nextproject);
+                    display.renderProject(nextproject);
+                }
+                else{
+                    display.clearProjectView();
+                }
+                display.renderProjectList();
+            }
+            else{
+                return;
+            }  
+        });
 
     }   
+
     return{
         addEventListeners,
     };

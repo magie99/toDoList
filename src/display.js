@@ -26,19 +26,30 @@ const display = (() => {
             const toDoItemContent = createElement("div", "toDoItemContent");
             toDoItemContent.appendChild(createElement("div", "", item.title));
             const details = createElement("div", "toDoItemDetails")
-            details.appendChild(createElement("div", "", `priority: ${item.priority}`));
             details.appendChild(createElement("div", "", `due: ${item.dueDate}`));
             toDoItemContent.appendChild(details);
             newItem.appendChild(toDoItemContent);
             newItem.appendChild(editIcon);
             toDoContainer.appendChild(newItem);
             newItem.dataset.id = item.id;
+            if(item.priority < 4){
+                newItem.classList.add("low-priority")
+            }
+            else if (item.priority < 7){
+                newItem.classList.add("mid-priority")
+            }
+            else{
+                newItem.classList.add("high-priority")
+            }
+            
     };
     
     const toDoContainer = document.getElementById("to-do-container");
     const projectHeader = document.getElementById("project-title");
+    const addToDoBtn = document.getElementById("addToDoBtn")
 
     const renderProject = (project) => {
+        addToDoBtn.style ="visibility: visible";
         toDoContainer.innerHTML = "";
         projectHeader.innerHTML = `${project.title}`;
 
@@ -60,16 +71,28 @@ const display = (() => {
         projectList.innerHTML = "";
         const projects = projectManager.getAllProjects();
         for (const project of projects){
-            const newItem = createElement("a", "projectLink", project.title);
-            newItem.setAttribute("href", "#"); 
-            newItem.dataset.projectTitle = project.title; 
+            const newItem = createElement("div", "project")
+            const newLink = createElement("a", "projectLink", project.title);
+            const trash = createElement("span", "trash-icon");
+            trash.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" style="height:20px" viewBox="0 0 24 24"><title>trash-can-outline</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>`
+            newLink.setAttribute("href", "#"); 
+            newItem.dataset.projectTitle = project.title;
+            newItem.appendChild(newLink);
+            newItem.appendChild(trash); 
             projectList.appendChild(newItem);
         }
     }
 
+    const clearProjectView= () => {
+        addToDoBtn.style ="visibility: hidden";
+        toDoContainer.innerHTML = "";
+        projectHeader.innerHTML = "";
+    }
+
     return {
         renderProjectList,
-        renderProject
+        renderProject,
+        clearProjectView
     };
   })();
 

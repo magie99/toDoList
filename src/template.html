@@ -14,17 +14,15 @@
     <div id="project-container">
         <div id="project-header">
             <h3 id="project-title">default</h3>
-            <button command="show-modal" commandfor="addToDo-dialog">add to do</button>
+            <button command="show-modal" commandfor="addToDo-dialog" id="addToDoBtn">add to do</button>
             <dialog id="addToDo-dialog">
                 <form id="addToDoForm">
                     <label for="title">Title</label>
-                    <input type="text" name="title" value="title" required>
-                    <label for="description">description</label>
-                    <input type="text" name="description" value="description" required>
+                    <input type="text" name="title"required>
                     <label for="dueDate">Due Date</label>
                     <input type="date" name="dueDate">
                     <label for="priority">Priority</label>
-                    <input type="number" name="priority" value="5">
+                    <input type="range" name="priority" min="1" max="10">
                     <button type="submit">submit</button>
                     <button type="button" class="btn-cancel">cancel</button>
                  </form>

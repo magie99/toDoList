@@ -1,6 +1,11 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
+:root {
+  --low-priority: rgba(215, 253, 189, 0.5);
+  --mid-priority: rgba(253, 249, 184, 0.5);
+  --high-priority: rgba(250, 180, 180, 0.5);
+}
 
 body{
     margin: 0;
@@ -112,4 +117,23 @@ body{
   #moreDialog button{
     border: 1px solid white;
     background-color: aquamarine;
-  }
+}
+
+.project{
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.low-priority{
+    background-color: var(--low-priority);
+}
+
+.mid-priority{
+    background-color: var(--mid-priority);
+}
+
+.high-priority{
+    background-color: var(--high-priority);
+}
+

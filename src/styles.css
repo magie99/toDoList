@@ -82,6 +82,7 @@ body{
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
+    padding-top: 25px;
 }
 
 .toDoItemDetails{
@@ -135,5 +136,17 @@ body{
 
 .high-priority{
     background-color: var(--high-priority);
+}
+
+.notes{
+    width: 100%;
+}
+
+.collapsicon{
+    align-self: center;
+}
+
+.notesHidden{
+    display: none;
 }
 

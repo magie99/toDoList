@@ -76,12 +76,12 @@ const interaction = (() => {
 
             if (addToDoForm.dataset.editId){
                 const item = projectManager.getCurrentProject().list.find(item => item.id == addToDoForm.dataset.editId);
-                item.update(data.title, data.description, data.dueDate, data.priority);
+                item.update(data.title, data.description, data.dueDate, data.priority, data.notes);
                 delete addToDoForm.dataset.editId
             
             }
             else{
-                const newToDo = new ToDo(data.title, data.description, data.dueDate, data.priority)
+                const newToDo = new ToDo(data.title, data.description, data.dueDate, data.priority, data.notes)
                 projectManager.getCurrentProject().addToDo(newToDo);
             }
             
@@ -94,6 +94,8 @@ const interaction = (() => {
             const checkbox = e.target.closest(".checkbox");
             const editIcon = e.target.closest(".editIcon");
             const toDoElement = e.target.closest(".toDoItem");
+            const collaps = e.target.closest(".collapsicon");
+            const notes = toDoElement.querySelector(".notes");
             
             if (!toDoElement){
                 return;
@@ -115,6 +117,10 @@ const interaction = (() => {
                 more.style.top = `${rect.bottom + window.scrollY}px`;
                 more.style.left = `${rect.left + window.scrollX}px`;
                 more.dataset.activeTodoId = toDoElement.dataset.id;
+            }
+
+            if (collaps){
+                    notes.classList.toggle("notesHidden");
             }
         });
 

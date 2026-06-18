@@ -23,6 +23,8 @@
                     <input type="date" name="dueDate">
                     <label for="priority">Priority</label>
                     <input type="range" name="priority" min="1" max="10">
+                    <label for="notes">notes</label>
+                    <textarea name="notes" maxlength="350" rows="5"></textarea>
                     <button type="submit">submit</button>
                     <button type="button" class="btn-cancel">cancel</button>
                  </form>
@@ -31,7 +33,6 @@
         <div id="to-do-container"></div>
     </div>
     <dialog id="moreDialog">
-        <button id="moreDetails">details</button>
         <button id="moreEdit">edit</button>
         <button id="moreDelete">delete</button>
     </dialog>

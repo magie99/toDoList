@@ -27,10 +27,16 @@ const display = (() => {
             toDoItemContent.appendChild(createElement("div", "", item.title));
             const details = createElement("div", "toDoItemDetails")
             details.appendChild(createElement("div", "", `due: ${item.dueDate}`));
+            const notes = createElement("textarea","notes", item.notes);
+            const arrow = createElement("div", "collapsicon");
+            arrow.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" style="width:20px" viewBox="0 0 24 24"><title>chevron-down</title><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>'
+            notes.setAttribute("rows", "6");
+            notes.classList.add("notesHidden");
             toDoItemContent.appendChild(details);
+            toDoItemContent.appendChild(notes);
+            toDoItemContent.appendChild(arrow);
             newItem.appendChild(toDoItemContent);
             newItem.appendChild(editIcon);
-            toDoContainer.appendChild(newItem);
             newItem.dataset.id = item.id;
             if(item.priority < 4){
                 newItem.classList.add("low-priority")
@@ -41,7 +47,7 @@ const display = (() => {
             else{
                 newItem.classList.add("high-priority")
             }
-            
+            toDoContainer.appendChild(newItem);
     };
     
     const toDoContainer = document.getElementById("to-do-container");

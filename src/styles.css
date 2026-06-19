@@ -13,8 +13,10 @@ body{
 }
 
 #sidebar{
-    min-width: 20vw;
+    position: sticky;
+    top: 0px;
     height: 100vh;
+    min-width: 20vw;
     background-color: rgb(95, 171, 194);
 }
 
@@ -54,7 +56,7 @@ body{
 
 .toDoItem{
     width: 50%;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid rgb(148, 141, 141);
     margin: 0;
     display: flex;
     justify-content: center;
@@ -73,7 +75,7 @@ body{
 }
 
 .toDoItem:first-child{
-    border-top: 1px solid black;
+    border-top: 2px solid rgb(148, 141, 141);
 }
 
 .toDoItemContent{
@@ -82,7 +84,7 @@ body{
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
-    padding-top: 25px;
+    padding-top: 45px;
 }
 
 .toDoItemDetails{

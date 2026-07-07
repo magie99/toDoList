@@ -26,11 +26,4 @@ export default class ToDo {
         this.priority = priority;
     }
 
-    //delete;
-    //markComplete;
-    //changeTitle;
-    //changeDescription;
-    //changeDueDate;
-    //changePriority;
-    //opendialog;
 }

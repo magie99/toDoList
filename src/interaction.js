@@ -2,6 +2,7 @@ import ToDo from "./toDo.js";
 import Project from "./projects.js";
 import display from "./display.js";
 import projectManager from "./projectManager.js";
+import storage from "./storage.js"
 
 const interaction = (() => {
     
@@ -38,6 +39,7 @@ const interaction = (() => {
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             const newProject = projectManager.addProject(data.title);
+            storage.safe();
             projectManager.changeCurrentProject(newProject);
             addProjectDialog.close();
             addProjectForm.reset();
@@ -53,6 +55,7 @@ const interaction = (() => {
             
             if(moreDelete){
                 projectManager.getCurrentProject().removeToDo(item);
+                storage.safe();
                 display.renderProject(projectManager.getCurrentProject());
                 more.close();
             }
@@ -66,6 +69,7 @@ const interaction = (() => {
                 });
                 addToDoForm.dataset.editId = item.id
                 addToDoDialog.showModal();
+                storage.safe();
             }
         });
 
@@ -84,7 +88,7 @@ const interaction = (() => {
                 const newToDo = new ToDo(data.title, data.description, data.dueDate, data.priority, data.notes)
                 projectManager.getCurrentProject().addToDo(newToDo);
             }
-            
+            storage.safe();
             addToDoDialog.close();
             addToDoForm.reset();
             display.renderProject(projectManager.getCurrentProject());
@@ -106,6 +110,7 @@ const interaction = (() => {
             if (checkbox){
                 item.markComplete();
                 display.renderProject(projectManager.getCurrentProject());
+                storage.safe();
             }
 
             if (editIcon){
@@ -145,6 +150,7 @@ const interaction = (() => {
             }
             if (trash){
                 projectManager.removeProject(target);
+                storage.safe();
                 const nextproject = projectManager.getAllProjects().at(-1);
                 if (nextproject){
                     projectManager.changeCurrentProject(nextproject);

@@ -95,16 +95,14 @@ const interaction = (() => {
         });
 
         toDoContainer.addEventListener('click', (e) => {
-            const checkbox = e.target.closest(".checkbox");
-            const editIcon = e.target.closest(".editIcon");
             const toDoElement = e.target.closest(".toDoItem");
-            const collaps = e.target.closest(".collapsicon");
-            const notes = toDoElement.querySelector(".notes");
-            
             if (!toDoElement){
                 return;
             }
-
+            const checkbox = e.target.closest(".checkbox");
+            const editIcon = e.target.closest(".editIcon");
+            const collaps = e.target.closest(".collapsicon");
+            const notes = toDoElement.querySelector(".notes");
             const item = projectManager.getCurrentProject().list.find(item => item.id == e.target.closest(".toDoItem").dataset.id);
 
             if (checkbox){

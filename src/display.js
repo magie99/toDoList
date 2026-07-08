@@ -33,6 +33,8 @@ const display = (() => {
             const arrow = createElement("div", "collapsicon");
             arrow.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" style="width:20px" viewBox="0 0 24 24"><title>chevron-down</title><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>'
             notes.setAttribute("rows", "6");
+            notes.setAttribute("readonly", "true"); 
+            notes.setAttribute("style", "caret-color: transparent"); 
             notes.classList.add("notesHidden");
             toDoItemContent.appendChild(details);
             toDoItemContent.appendChild(notes);

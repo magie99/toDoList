@@ -9,12 +9,11 @@ const storage = (() => {
             const rawProjects = JSON.parse(storedProjects);
             for (const project of rawProjects){
                 const list = project.list;
-                const newProject = new Project(project.title);
+                const newProject = projectManager.addProject(project.title);  
                 for (const item of list){
                     const newToDo = new ToDo(item.title, item.description, item.dueDate, item.priority, item.notes);
                     newProject.addToDo(newToDo);
                 }
-                projectManager.addProject(newProject);  
             }
         }
     }
@@ -22,10 +21,9 @@ const storage = (() => {
     const safe = () =>{
             localStorage.setItem("projects", JSON.stringify(projectManager.getAllProjects()))
         }
-
     return{
         load,
-        safe
+        safe,
     }
 })();
 
